@@ -24,6 +24,8 @@ public class Unit {
     @Column(nullable = false)
     private String code;
 
+    private String name;
+
     private String description;
 
     @CreatedDate
