@@ -23,8 +23,14 @@ public class RestData<T> {
         this.status = RestStatus.SUCCESS;
         this.data = data;
     }
+    public RestData(  RestStatus status, T message) {
+        this.status = status;
+        this.message = message;
+    }
+
 
     public static RestData<?> error(Object message) {
-        return new RestData<>(RestStatus.ERROR, message, null);
+        return new RestData<>(RestStatus.ERROR, message);
     }
+
 }

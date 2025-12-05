@@ -1,32 +1,26 @@
 package com.example.quanlynhansu.constant;
 
 public class ErrorMessage {
-    public static final String ERR_EXCEPTION_GENERAL = "exception.general";
-    public static final String UNAUTHORIZED = "exception.unauthorized";
-    public static final String FORBIDDEN = "exception.forbidden";
-    public static final String FORBIDDEN_UPDATE_DELETE = "exception.forbidden.update-delete";
+    private ErrorMessage() {}
+    public static final String ERR_EXCEPTION_GENERAL = "Có lỗi bất thường đã xảy ra";
+    public static final String UNAUTHORIZED = "Xin lỗi, bạn cần cung cấp thông tin xác thực để thực hiện hành động này";
+    public static final String ERR_DUPLICATE = "%s với giá trị %s đã tồn tại.";
+    public static final String FORBIDDEN = "Xin lỗi, bạn không có quyền để thực hiện hành động này";
+    public static final String INVALID_IMAGE_FILE="Chỉ cho phép hình ảnh PNG, JPG, JPEG, WEBP hoặc GIF";
+    public static final String INVALID_JSON_FORMAT = "Dữ liệu gửi lên có định dạng JSON không hợp lệ. Vui lòng kiểm tra lại.";
+    public static final String TO_MANY_REQUEST = "Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau.";
+    public static final String INCORRECT_PASSWORD = "Mật khẩu sai";
 
-    //error validation dto
-    public static final String INVALID_SOME_THING_FIELD = "invalid.general";
-    public static final String INVALID_FORMAT_SOME_THING_FIELD = "invalid.general.format";
-    public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
-    public static final String NOT_BLANK_FIELD = "invalid.general.not-blank";
-    public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
-    public static final String INVALID_DATE = "invalid.date-format";
-    public static final String INVALID_DATE_FEATURE = "invalid.date-future";
-    public static final String INVALID_DATETIME = "invalid.datetime-format";
-
-    public static class Auth {
-        public static final String ERR_INCORRECT_USERNAME = "exception.auth.incorrect.username";
-        public static final String ERR_INCORRECT_PASSWORD = "exception.auth.incorrect.password";
-        public static final String ERR_ACCOUNT_NOT_ENABLED = "exception.auth.account.not.enabled";
-        public static final String ERR_ACCOUNT_LOCKED = "exception.auth.account.locked";
-        public static final String INVALID_REFRESH_TOKEN = "exception.auth.invalid.refresh.token";
-        public static final String EXPIRED_REFRESH_TOKEN = "exception.auth.expired.refresh.token";
-    }
-
-    public static class User {
-        public static final String ERR_NOT_FOUND_USERNAME = "exception.user.not.found.username";
-        public static final String ERR_NOT_FOUND_ID = "exception.user.not.found.id";
+    public static class Validation {
+        public static final String NOT_BLANK = "Không thể trống";
+        public static final String INVALID_FORMAT_PASSWORD = "Mật khẩu không đủ mạnh (ít nhất 6 ký tự, bao gồm chữ và số)";
+        public static final String NOT_NULL= "Trường này là bắt buộc";
+        public static final String NOT_EMPTY="Trường này không được để rỗng";
+        public static final String INVALID_FORMAT_FIELD="Định dạng không hợp lệ";
+        public static final String MUST_IN_PAST = "Ngày phải ở trong quá khứ";
+        public static final String MUST_IN_FUTURE = "Ngày phải ở trong tương lai";
+        public static final String INVALID_STUDENT_CODE="Mã sinh viên phải có 10 ký tự";
+        public static final String POSITIVE="Số nhập vào phải >0";
+        public static final String INVALID_SCORE="Điểm phải lớn hơn hoặc bằng 0 và nhỏ hơn hoặc bằng 10";
     }
 }
