@@ -21,7 +21,8 @@ public class VsResponseUtil {
 
     public static ResponseEntity<RestData<?>> success(HttpStatus status, MultiValueMap<String, String> header, Object data) {
         RestData<?> response = new RestData<>(data);
-        HttpHeaders responseHeaders = new HttpHeaders(header);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.putAll(header);
         return ResponseEntity.ok().headers(responseHeaders).body(response);
     }
 
@@ -29,4 +30,5 @@ public class VsResponseUtil {
         RestData<?> response = RestData.error(message);
         return new ResponseEntity<>(response, status);
     }
+
 }
