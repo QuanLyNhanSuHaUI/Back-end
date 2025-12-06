@@ -17,6 +17,6 @@ public interface DepartmentMapper {
     DepartmentResponse toDepartmentResponse(Department department);
     Department toDepartment(DepartmentCreationRequest request);
 
-    List<DepartmentResponse> toListDepartment(List<DepartmentResponse> departmentResponses);
+    List<DepartmentResponse> toListDepartmentResponse(List<Department> departments);
 
 }
