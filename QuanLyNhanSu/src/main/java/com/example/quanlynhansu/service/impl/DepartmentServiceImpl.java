@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -43,5 +45,13 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department savedDepartment = departmentRepository.save(department);
 
         return departmentMapper.toDepartmentResponse(savedDepartment);
+    }
+
+    @Override
+    public List<DepartmentResponse> getAllDepartments() {
+
+        List<Department> departments = departmentRepository.findAll();
+
+        return departmentMapper.toListDepartmentResponse(departments);
     }
 }
