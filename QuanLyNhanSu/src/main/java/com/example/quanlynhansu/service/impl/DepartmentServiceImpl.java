@@ -66,7 +66,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentResponse getDepartmentByName(String name) {
-        return null;
+
+        Department department = departmentRepository.findDepartmentByName(name);
+
+        if(department == null){
+            throw new NotFoundException(ErrorMessage.Department.USERNAME_NOT_FOUND);
+        }
+        return departmentMapper.toDepartmentResponse(department);
     }
 
 

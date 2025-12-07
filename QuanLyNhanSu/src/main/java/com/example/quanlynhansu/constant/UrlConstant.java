@@ -8,6 +8,7 @@ public class UrlConstant {
         private static final String PRE_FIX = "/departments";
         public static final String DEPARTMENT_COMMON = PRE_FIX;
         public static final String DEPARTMENT_ID = PRE_FIX + "/{id}";
+        public static final String DEPARTMENT_NAME = PRE_FIX + "/find";
     }
 
 }

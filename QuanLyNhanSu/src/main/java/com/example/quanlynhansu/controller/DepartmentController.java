@@ -34,4 +34,8 @@ public class DepartmentController {
     public ResponseEntity<?> getDepartmentById(@PathVariable String id){
         return VsResponseUtil.success(HttpStatus.OK,departmentService.getDepartmentById(id));
     }
+    @GetMapping(UrlConstant.Department.DEPARTMENT_NAME)
+    public ResponseEntity<?> getDepartmentByName(@RequestParam("name") String name){
+        return VsResponseUtil.success(HttpStatus.OK, departmentService.getDepartmentByName(name));
+    }
 }

@@ -26,5 +26,6 @@ public class ErrorMessage {
 
     public static class Department{
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy phòng ban nào với id: %s";
+        public static final String USERNAME_NOT_FOUND ="Không tìm thấy phòng ban nào với tên: %s";
     }
 }
