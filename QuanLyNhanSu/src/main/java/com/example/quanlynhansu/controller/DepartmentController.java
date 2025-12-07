@@ -4,6 +4,7 @@ import com.example.quanlynhansu.base.RestApiV1;
 import com.example.quanlynhansu.base.VsResponseUtil;
 import com.example.quanlynhansu.constant.UrlConstant;
 import com.example.quanlynhansu.domain.dto.request.DepartmentCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.DepartmentUpdateRequest;
 import com.example.quanlynhansu.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -37,5 +38,10 @@ public class DepartmentController {
     @GetMapping(UrlConstant.Department.DEPARTMENT_NAME)
     public ResponseEntity<?> getDepartmentByName(@RequestParam("name") String name){
         return VsResponseUtil.success(HttpStatus.OK, departmentService.getDepartmentByName(name));
+    }
+
+    @PatchMapping(UrlConstant.Department.DEPARTMENT_ID)
+    public ResponseEntity<?> updateDepartment(@RequestBody DepartmentUpdateRequest request,@PathVariable String id){
+        return VsResponseUtil.success(departmentService.updateDepartment(request,id));
     }
 }

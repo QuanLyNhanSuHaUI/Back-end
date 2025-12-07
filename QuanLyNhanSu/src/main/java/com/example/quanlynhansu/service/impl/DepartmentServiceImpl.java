@@ -2,6 +2,7 @@ package com.example.quanlynhansu.service.impl;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.domain.dto.request.DepartmentCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.DepartmentUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.DepartmentResponse;
 import com.example.quanlynhansu.domain.entity.Department;
 import com.example.quanlynhansu.domain.mapper.DepartmentMapper;
@@ -9,6 +10,7 @@ import com.example.quanlynhansu.exception.DuplicateResourceException;
 import com.example.quanlynhansu.exception.NotFoundException;
 import com.example.quanlynhansu.repository.DepartmentRepository;
 import com.example.quanlynhansu.service.DepartmentService;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -72,6 +74,21 @@ public class DepartmentServiceImpl implements DepartmentService {
         if(department == null){
             throw new NotFoundException(ErrorMessage.Department.USERNAME_NOT_FOUND);
         }
+        return departmentMapper.toDepartmentResponse(department);
+    }
+
+    @Override
+    @Transactional
+    public DepartmentResponse updateDepartment(DepartmentUpdateRequest request, String id) {
+
+        Department department = departmentRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Department.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
+
+        departmentMapper.updateDepartment(request, department);
+
+        departmentRepository.save(department);
+
         return departmentMapper.toDepartmentResponse(department);
     }
 
