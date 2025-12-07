@@ -23,4 +23,8 @@ public class ErrorMessage {
         public static final String POSITIVE="Số nhập vào phải >0";
         public static final String INVALID_SCORE="Điểm phải lớn hơn hoặc bằng 0 và nhỏ hơn hoặc bằng 10";
     }
+
+    public static class Department{
+        public static final String ERR_NOT_FOUND_ID ="Không tìm thấy phòng ban nào với id: %s";
+    }
 }

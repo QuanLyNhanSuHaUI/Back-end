@@ -12,4 +12,8 @@ public interface DepartmentService {
 
     List<DepartmentResponse> getAllDepartments();
 
+    DepartmentResponse getDepartmentById(String id);
+
+    DepartmentResponse getDepartmentByName(String name);
+
 }
