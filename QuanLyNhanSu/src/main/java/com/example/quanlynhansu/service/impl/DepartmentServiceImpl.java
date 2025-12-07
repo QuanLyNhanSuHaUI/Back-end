@@ -6,6 +6,7 @@ import com.example.quanlynhansu.domain.dto.response.DepartmentResponse;
 import com.example.quanlynhansu.domain.entity.Department;
 import com.example.quanlynhansu.domain.mapper.DepartmentMapper;
 import com.example.quanlynhansu.exception.DuplicateResourceException;
+import com.example.quanlynhansu.exception.NotFoundException;
 import com.example.quanlynhansu.repository.DepartmentRepository;
 import com.example.quanlynhansu.service.DepartmentService;
 import lombok.AccessLevel;
@@ -54,4 +55,25 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentMapper.toListDepartmentResponse(departments);
     }
+
+    @Override
+    public DepartmentResponse getDepartmentById(String id) {
+
+        Department department = departmentRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Department.ERR_NOT_FOUND_ID, new String[]{id}));
+        return departmentMapper.toDepartmentResponse(department);
+    }
+
+    @Override
+    public DepartmentResponse getDepartmentByName(String name) {
+
+        Department department = departmentRepository.findDepartmentByName(name);
+
+        if(department == null){
+            throw new NotFoundException(ErrorMessage.Department.USERNAME_NOT_FOUND);
+        }
+        return departmentMapper.toDepartmentResponse(department);
+    }
+
+
 }

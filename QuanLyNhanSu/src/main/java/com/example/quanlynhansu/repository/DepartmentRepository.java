@@ -9,4 +9,6 @@ public interface DepartmentRepository extends JpaRepository<Department, String> 
     boolean existsByDepartmentCode(String departmentCode);
 
     boolean existsByName(String name);
+
+    Department findDepartmentByName(String name);
 }
