@@ -2,12 +2,10 @@ package com.example.quanlynhansu.domain.mapper;
 
 
 import com.example.quanlynhansu.domain.dto.request.DepartmentCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.DepartmentUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.DepartmentResponse;
 import com.example.quanlynhansu.domain.entity.Department;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -18,5 +16,9 @@ public interface DepartmentMapper {
     Department toDepartment(DepartmentCreationRequest request);
 
     List<DepartmentResponse> toListDepartmentResponse(List<Department> departments);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
+    void updateDepartment(DepartmentUpdateRequest request, @MappingTarget Department department);
 
 }
