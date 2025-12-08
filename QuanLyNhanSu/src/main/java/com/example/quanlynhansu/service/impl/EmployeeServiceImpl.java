@@ -60,4 +60,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return employeeMapper.toEmployeeResponse(employee);
     }
+
+    @Override
+    public List<EmployeeResponse> getEmployeeByFullName(String name) {
+
+        List<Employee> employee = employeeRepository.findByFullNameContaining(name);
+
+        if (employee == null){
+            throw new NotFoundException(ErrorMessage.Employee.USERNAME_NOT_FOUND);
+        }
+
+        return employeeMapper.toListEmployeeResponses(employee);
+    }
 }
