@@ -92,5 +92,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentMapper.toDepartmentResponse(department);
     }
 
+    @Override
+    public DepartmentResponse deleteDepartment(String id) {
+        Department department = departmentRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Department.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
+        departmentRepository.delete(department);
+        return departmentMapper.toDepartmentResponse(department);
+    }
+
 
 }

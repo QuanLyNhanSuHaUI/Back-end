@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
@@ -43,5 +44,10 @@ public class DepartmentController {
     @PatchMapping(UrlConstant.Department.DEPARTMENT_ID)
     public ResponseEntity<?> updateDepartment(@RequestBody DepartmentUpdateRequest request,@PathVariable String id){
         return VsResponseUtil.success(departmentService.updateDepartment(request,id));
+    }
+
+    @DeleteMapping(UrlConstant.Department.DEPARTMENT_ID)
+    public ResponseEntity<?> deleteDepartment(@PathVariable String id){
+        return VsResponseUtil.success(departmentService.deleteDepartment(id));
     }
 }
