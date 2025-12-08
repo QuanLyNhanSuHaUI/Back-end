@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,6 +31,11 @@ public class EmployeeController {
     @GetMapping(UrlConstant.Employee.DEPARTMENT_COMMON)
     public ResponseEntity<?> getAllEmployees(){
         return VsResponseUtil.success(HttpStatus.OK, employeeService.getAllEmployees());
+    }
+
+    @GetMapping(UrlConstant.Employee.DEPARTMENT_ID)
+    public ResponseEntity<?> getEmployeeById(@PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.OK, employeeService.getEmployeeById(id));
     }
 
 }

@@ -6,6 +6,7 @@ import com.example.quanlynhansu.domain.dto.response.EmployeeResponse;
 import com.example.quanlynhansu.domain.entity.Employee;
 import com.example.quanlynhansu.domain.mapper.EmployeeMapper;
 import com.example.quanlynhansu.exception.DuplicateResourceException;
+import com.example.quanlynhansu.exception.NotFoundException;
 import com.example.quanlynhansu.repository.EmployeeRepository;
 import com.example.quanlynhansu.service.EmployeeService;
 import lombok.AccessLevel;
@@ -49,5 +50,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> list = employeeRepository.findAll();
 
         return employeeMapper.toListEmployeeResponses(list);
+    }
+
+    @Override
+    public EmployeeResponse getEmployeeById(String id) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Employee.ERR_NOT_FOUND_ID, new String[]{id}));
+
+        return employeeMapper.toEmployeeResponse(employee);
     }
 }
