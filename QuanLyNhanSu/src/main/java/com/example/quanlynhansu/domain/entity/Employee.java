@@ -4,6 +4,8 @@ import com.example.quanlynhansu.constant.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
@@ -46,13 +48,16 @@ public class Employee {
 
     private String qualification;
 
+
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @Column(name = "create_at", updatable = false)
+    @CreatedDate
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
-    @Column(name = "update_at", updatable = false)
+    @LastModifiedDate
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

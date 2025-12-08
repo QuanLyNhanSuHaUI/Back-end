@@ -3,8 +3,8 @@ package com.example.quanlynhansu.controller;
 import com.example.quanlynhansu.base.RestApiV1;
 import com.example.quanlynhansu.base.VsResponseUtil;
 import com.example.quanlynhansu.constant.UrlConstant;
-import com.example.quanlynhansu.domain.dto.request.DepartmentCreationRequest;
-import com.example.quanlynhansu.domain.dto.request.DepartmentUpdateRequest;
+import com.example.quanlynhansu.domain.dto.request.department.DepartmentCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.department.DepartmentUpdateRequest;
 import com.example.quanlynhansu.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestApiV1

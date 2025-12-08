@@ -1,6 +1,7 @@
-package com.example.quanlynhansu.domain.dto.request;
+package com.example.quanlynhansu.domain.dto.request.department;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,19 +9,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DepartmentCreationRequest {
+public class DepartmentUpdateRequest {
 
-    @NotBlank(message = ErrorMessage.Validation.NOT_BLANK)
     private String departmentCode;
 
-    @NotBlank(message = ErrorMessage.Validation.NOT_BLANK)
     private String name;
 
-    @NotNull(message = ErrorMessage.Validation.NOT_EMPTY)
     private String description;
 
 }

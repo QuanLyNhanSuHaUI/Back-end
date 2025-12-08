@@ -1,8 +1,8 @@
 package com.example.quanlynhansu.service.impl;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
-import com.example.quanlynhansu.domain.dto.request.DepartmentCreationRequest;
-import com.example.quanlynhansu.domain.dto.request.DepartmentUpdateRequest;
+import com.example.quanlynhansu.domain.dto.request.department.DepartmentCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.department.DepartmentUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.DepartmentResponse;
 import com.example.quanlynhansu.domain.entity.Department;
 import com.example.quanlynhansu.domain.mapper.DepartmentMapper;
@@ -12,8 +12,6 @@ import com.example.quanlynhansu.repository.DepartmentRepository;
 import com.example.quanlynhansu.service.DepartmentService;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
