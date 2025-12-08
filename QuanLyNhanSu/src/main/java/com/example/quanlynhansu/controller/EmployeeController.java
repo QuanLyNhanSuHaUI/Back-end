@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -22,14 +20,24 @@ public class EmployeeController {
 
     EmployeeService employeeService;
 
-    @PostMapping(UrlConstant.Employee.DEPARTMENT_COMMON)
+    @PostMapping(UrlConstant.Employee.EMPLOYEE_COMMON)
     public ResponseEntity<?> createEmployee(@Valid @RequestBody EmployeeCreationRequest request){
         return VsResponseUtil.success(HttpStatus.CREATED, employeeService.createEmployee(request));
     }
 
-    @GetMapping(UrlConstant.Employee.DEPARTMENT_COMMON)
+    @GetMapping(UrlConstant.Employee.EMPLOYEE_COMMON)
     public ResponseEntity<?> getAllEmployees(){
         return VsResponseUtil.success(HttpStatus.OK, employeeService.getAllEmployees());
+    }
+
+    @GetMapping(UrlConstant.Employee.EMPLOYEE_ID)
+    public ResponseEntity<?> getEmployeeById(@PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.OK, employeeService.getEmployeeById(id));
+    }
+
+    @GetMapping(UrlConstant.Employee.EMPLOYEE_NAME)
+    public ResponseEntity<?> getEmployeeByFullName(@RequestParam String name){
+        return VsResponseUtil.success(HttpStatus.OK, employeeService.getEmployeeByFullName(name));
     }
 
 }
