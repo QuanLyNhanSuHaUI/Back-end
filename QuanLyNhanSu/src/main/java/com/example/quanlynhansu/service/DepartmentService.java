@@ -19,4 +19,6 @@ public interface DepartmentService {
 
     DepartmentResponse updateDepartment(DepartmentUpdateRequest request, String id);
 
+    DepartmentResponse deleteDepartment(String id);
+
 }
