@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -39,5 +41,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
 
         return employeeMapper.toEmployeeResponse(savedEmployee);
+    }
+
+    @Override
+    public List<EmployeeResponse> getAllEmployees() {
+
+        List<Employee> list = employeeRepository.findAll();
+
+        return employeeMapper.toListEmployeeResponses(list);
     }
 }
