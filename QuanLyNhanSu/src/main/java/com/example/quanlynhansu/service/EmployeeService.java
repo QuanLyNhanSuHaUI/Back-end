@@ -4,9 +4,13 @@ import com.example.quanlynhansu.domain.dto.request.employee.EmployeeCreationRequ
 import com.example.quanlynhansu.domain.dto.response.EmployeeResponse;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 public interface EmployeeService {
 
     EmployeeResponse createEmployee(EmployeeCreationRequest request);
+
+    List<EmployeeResponse> getAllEmployees();
 
 }

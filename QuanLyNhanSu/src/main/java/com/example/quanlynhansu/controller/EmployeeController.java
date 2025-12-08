@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,6 +25,11 @@ public class EmployeeController {
     @PostMapping(UrlConstant.Employee.DEPARTMENT_COMMON)
     public ResponseEntity<?> createEmployee(@Valid @RequestBody EmployeeCreationRequest request){
         return VsResponseUtil.success(HttpStatus.CREATED, employeeService.createEmployee(request));
+    }
+
+    @GetMapping(UrlConstant.Employee.DEPARTMENT_COMMON)
+    public ResponseEntity<?> getAllEmployees(){
+        return VsResponseUtil.success(HttpStatus.OK, employeeService.getAllEmployees());
     }
 
 }
