@@ -46,6 +46,11 @@ public class Employee {
 
     private String qualification;
 
+    private String password;
+
+    @Column(name = "last_login")
+    private LocalDateTime lastLogin;
+
     @Column(name = "is_active")
     private Boolean isActive;
 
@@ -58,10 +63,6 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
-
-    @JsonIgnore
-    @OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Account account;
 
     @JsonIgnore
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
