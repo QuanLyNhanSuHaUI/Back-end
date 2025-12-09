@@ -12,6 +12,7 @@ import com.example.quanlynhansu.repository.EmployeeRepository;
 import com.example.quanlynhansu.service.EmployeeService;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +92,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.save(employee);
 
+        return employeeMapper.toEmployeeResponse(employee);
+    }
+
+    @Override
+    public EmployeeResponse deleteEmployee(String id) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Employee.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
+
+        employeeRepository.delete(employee);
         return employeeMapper.toEmployeeResponse(employee);
     }
 }
