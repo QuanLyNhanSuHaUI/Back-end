@@ -2,6 +2,7 @@ package com.example.quanlynhansu.service.impl;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.domain.dto.request.employee.EmployeeCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.employee.EmployeeUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.EmployeeResponse;
 import com.example.quanlynhansu.domain.entity.Employee;
 import com.example.quanlynhansu.domain.mapper.EmployeeMapper;
@@ -9,9 +10,11 @@ import com.example.quanlynhansu.exception.DuplicateResourceException;
 import com.example.quanlynhansu.exception.NotFoundException;
 import com.example.quanlynhansu.repository.EmployeeRepository;
 import com.example.quanlynhansu.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeMapper employeeMapper;
@@ -71,5 +75,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         return employeeMapper.toListEmployeeResponses(employee);
+    }
+
+    @Override
+    @Transactional
+    public EmployeeResponse updateEmployee(EmployeeUpdateRequest request, String id) {
+
+        Employee employee = employeeRepository.findById(id).orElseThrow(
+                ()-> new NotFoundException(ErrorMessage.Employee.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
+
+
+        employeeMapper.updateEmployee(request,employee);
+
+
+        employeeRepository.save(employee);
+
+        return employeeMapper.toEmployeeResponse(employee);
     }
 }
