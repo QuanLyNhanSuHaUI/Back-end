@@ -21,4 +21,6 @@ public interface EmployeeService {
 
     EmployeeResponse updateEmployee(EmployeeUpdateRequest request, String id);
 
+    EmployeeResponse deleteEmployee(String id);
+
 }

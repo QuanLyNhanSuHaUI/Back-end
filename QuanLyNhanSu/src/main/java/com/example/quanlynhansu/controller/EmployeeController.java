@@ -46,4 +46,9 @@ public class EmployeeController {
         return VsResponseUtil.success(HttpStatus.OK, employeeService.updateEmployee(request, id));
     }
 
+    @DeleteMapping(UrlConstant.Employee.EMPLOYEE_ID)
+    public ResponseEntity<?> deleteEmployee(@PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.OK, employeeService.deleteEmployee(id));
+    }
+
 }
