@@ -23,11 +23,11 @@ public class Account {
     private String id;
 
     @Column(name = "user_name", unique = true)
-    private String userName;
+    private String username;
 
-    private String password; // Nên được lưu dưới dạng mã hóa (hashed)
+    private String password;
 
-    @Enumerated(EnumType.STRING) // Giả định ROLE là một Enum
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(name = "is_active")
