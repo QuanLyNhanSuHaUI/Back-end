@@ -19,7 +19,7 @@ public class ErrorMessage {
         public static final String INVALID_FORMAT_FIELD="Định dạng không hợp lệ";
         public static final String MUST_IN_PAST = "Ngày phải ở trong quá khứ";
         public static final String MUST_IN_FUTURE = "Ngày phải ở trong tương lai";
-        public static final String INVALID_STUDENT_CODE="Mã sinh viên phải có 10 ký tự";
+        public static final String INVALID_EMPLOYEE_CODE="Mã sinh viên phải có 10 ký tự";
         public static final String POSITIVE="Số nhập vào phải >0";
         public static final String INVALID_SCORE="Điểm phải lớn hơn hoặc bằng 0 và nhỏ hơn hoặc bằng 10";
     }
@@ -34,6 +34,8 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy nhân viên nào với id: %s";
 
         public static final String USERNAME_NOT_FOUND ="Không tìm thấy nhân viên nào với tên: %s";
+
+//        public static final String
 
     }
 }

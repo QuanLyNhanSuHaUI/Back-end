@@ -13,6 +13,7 @@ public interface EmployeeMapper {
 
     Employee toEmployee(EmployeeCreationRequest request);
 
+    @Mapping(source = "department.name", target = "departmentName")
     EmployeeResponse toEmployeeResponse(Employee employee);
 
     List<EmployeeResponse> toListEmployeeResponses(List<Employee> list);
