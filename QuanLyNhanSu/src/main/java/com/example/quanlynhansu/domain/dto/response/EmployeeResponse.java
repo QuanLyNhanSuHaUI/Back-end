@@ -2,6 +2,7 @@ package com.example.quanlynhansu.domain.dto.response;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.constant.Gender;
+import com.example.quanlynhansu.domain.entity.Department;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +24,8 @@ public class EmployeeResponse {
 
     private String fullName;
 
+    private String username;
+
     private String email;
 
     private Gender gender;
@@ -40,4 +43,6 @@ public class EmployeeResponse {
     private LocalDateTime createAt;
 
     private LocalDateTime updateAt;
+
+    private String departmentName;
 }

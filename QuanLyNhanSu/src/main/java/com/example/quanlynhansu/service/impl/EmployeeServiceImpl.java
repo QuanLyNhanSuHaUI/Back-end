@@ -4,10 +4,12 @@ import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.domain.dto.request.employee.EmployeeCreationRequest;
 import com.example.quanlynhansu.domain.dto.request.employee.EmployeeUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.EmployeeResponse;
+import com.example.quanlynhansu.domain.entity.Department;
 import com.example.quanlynhansu.domain.entity.Employee;
 import com.example.quanlynhansu.domain.mapper.EmployeeMapper;
 import com.example.quanlynhansu.exception.DuplicateResourceException;
 import com.example.quanlynhansu.exception.NotFoundException;
+import com.example.quanlynhansu.repository.DepartmentRepository;
 import com.example.quanlynhansu.repository.EmployeeRepository;
 import com.example.quanlynhansu.service.EmployeeService;
 import jakarta.transaction.Transactional;
@@ -16,6 +18,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,9 +31,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeMapper employeeMapper;
     EmployeeRepository employeeRepository;
+    PasswordEncoder passwordEncoder;
+    private DepartmentRepository departmentRepository;
 
     @Override
+    @Transactional
     public EmployeeResponse createEmployee(EmployeeCreationRequest request) {
+
+        Department department = departmentRepository.findById(request.getDepartmentId())
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Department.ERR_NOT_FOUND_ID));
 
         if(employeeRepository.existsByEmployeeCode(request.getEmployeeCode())){
             throw new DuplicateResourceException(ErrorMessage.ERR_DUPLICATE,
@@ -43,6 +52,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         Employee employee = employeeMapper.toEmployee(request);
+
+        employee.setDepartment(department);
+
+        employee.setUsername(generateUsername(request.getEmployeeCode()));
+        String rawPassword = generatePassword(request.getEmployeeCode());
+        System.out.println(rawPassword);
+        employee.setPassword(passwordEncoder.encode(rawPassword));
 
         Employee savedEmployee = employeeRepository.save(employee);
 
@@ -104,5 +120,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.delete(employee);
         return employeeMapper.toEmployeeResponse(employee);
+    }
+
+    private String generateUsername (String employeeCode) {
+        return "nv" + employeeCode;
+    }
+
+    private String generatePassword(String employeeCode) {
+        return "svHAUI" + employeeCode.substring(employeeCode.length() - 4);
     }
 }

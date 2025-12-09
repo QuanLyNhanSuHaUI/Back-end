@@ -1,6 +1,7 @@
 package com.example.quanlynhansu.domain.entity;
 
 import com.example.quanlynhansu.constant.Gender;
+import com.example.quanlynhansu.constant.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,6 +33,12 @@ public class Employee {
 
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "email", unique = true)
     private String email;
