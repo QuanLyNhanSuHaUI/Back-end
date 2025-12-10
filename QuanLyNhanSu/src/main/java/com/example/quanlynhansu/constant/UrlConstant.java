@@ -28,6 +28,10 @@ public class UrlConstant {
 
         public static final String CONTRACT_COMMON = PRE_FIX;
 
+        public static final String CONTRACT_ID = PRE_FIX + "/{id}";
+
+        public static final String CONTRACT_OF_EMPLOYEE = PRE_FIX + "/find";
+
     }
 
 }

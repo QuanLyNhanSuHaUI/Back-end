@@ -16,7 +16,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +55,33 @@ public class ContractServiceImpl implements ContractService {
         List<Contract> list = contractRepository.findAll();
 
         return contractMapper.toListContractResponses(list);
+    }
+
+    @Override
+    public ContractResponse getContractById(String id) {
+
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Contract.ERR_NOT_FOUND_ID
+                        , new String[]{id}));
+
+        return contractMapper.toContractResponse(contract);
+    }
+
+    @Override
+    public List<ContractResponse> getContractByEmployeeName(String name) {
+
+        List<Employee> employees = employeeRepository.findByFullNameContaining(name);
+
+        if (employees.isEmpty()){
+            return Collections.emptyList();
+        }
+
+        List<String> employeeIds = employees.stream()
+                .map(Employee::getId)
+                .collect(Collectors.toList());
+
+        List<Contract> contracts = contractRepository.findByEmployeeIdIn(employeeIds);
+
+        return contractMapper.toListContractResponses(contracts);
     }
 }

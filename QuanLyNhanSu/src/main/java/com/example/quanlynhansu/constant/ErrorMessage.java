@@ -34,8 +34,11 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy nhân viên nào với id: %s";
 
         public static final String USERNAME_NOT_FOUND ="Không tìm thấy nhân viên nào với tên: %s";
+    }
 
-//        public static final String
+    public static class Contract{
+
+        public static final String ERR_NOT_FOUND_ID ="Không tìm thấy hợp đồng nào với id: %s";
 
     }
 }

@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @RestApiV1
 @RequiredArgsConstructor
@@ -28,8 +26,18 @@ public class ContractController {
     }
 
     @GetMapping(UrlConstant.Contract.CONTRACT_COMMON)
-    public ResponseEntity<?> getAllEntity (){
+    public ResponseEntity<?> getAllContracts (){
         return VsResponseUtil.success(HttpStatus.OK, contractService.getAllContract());
+    }
+
+    @GetMapping(UrlConstant.Contract.CONTRACT_ID)
+    public ResponseEntity<?> getContractById(@PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.OK, contractService.getContractById(id));
+    }
+
+    @GetMapping(UrlConstant.Contract.CONTRACT_OF_EMPLOYEE)
+    public ResponseEntity<?> getContractByEmployeeName(@RequestParam() String name){
+        return VsResponseUtil.success(HttpStatus.OK, contractService.getContractByEmployeeName(name));
     }
 
 }
