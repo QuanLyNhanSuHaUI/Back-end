@@ -53,4 +53,14 @@ public class ContractServiceImpl implements ContractService {
 
         return contractMapper.toListContractResponses(list);
     }
+
+    @Override
+    public ContractResponse getContractById(String id) {
+
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Contract.ERR_NOT_FOUND_ID
+                        , new String[]{id}));
+
+        return contractMapper.toContractResponse(contract);
+    }
 }

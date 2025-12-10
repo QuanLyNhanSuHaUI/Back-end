@@ -11,4 +11,6 @@ public interface ContractService {
 
     List<ContractResponse> getAllContract();
 
+    ContractResponse getContractById(String id);
+
 }
