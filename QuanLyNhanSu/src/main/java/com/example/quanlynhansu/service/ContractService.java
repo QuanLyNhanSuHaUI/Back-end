@@ -13,4 +13,6 @@ public interface ContractService {
 
     ContractResponse getContractById(String id);
 
+    List<ContractResponse> getContractByEmployeeName(String name);
+
 }
