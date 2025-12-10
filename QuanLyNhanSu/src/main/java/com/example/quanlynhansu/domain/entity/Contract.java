@@ -3,6 +3,8 @@ package com.example.quanlynhansu.domain.entity;
 import com.example.quanlynhansu.constant.ContractType;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
@@ -42,9 +44,11 @@ public class Contract {
     @Column(name = "salary_level")
     private Integer salaryLevel;
 
+    @CreatedDate
     @Column(name = "create_at", updatable = false)
     private LocalDateTime createAt;
 
+    @LastModifiedDate
     @Column(name = "update_at", updatable = false)
     private LocalDateTime updateAt;
 
