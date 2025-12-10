@@ -22,4 +22,12 @@ public class UrlConstant {
 
     }
 
+    public static class Contract{
+
+        private static final String PRE_FIX = "/contracts";
+
+        public static final String CONTRACT_COMMON = PRE_FIX;
+
+    }
+
 }
