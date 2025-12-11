@@ -127,6 +127,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private String generatePassword(String employeeCode) {
-        return "svHAUI" + employeeCode.substring(employeeCode.length() - 4);
+        return "nvHAUI" + employeeCode.substring(employeeCode.length() - 4);
     }
 }

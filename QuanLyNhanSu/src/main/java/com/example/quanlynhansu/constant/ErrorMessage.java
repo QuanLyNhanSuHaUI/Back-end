@@ -24,6 +24,12 @@ public class ErrorMessage {
         public static final String INVALID_SCORE="Điểm phải lớn hơn hoặc bằng 0 và nhỏ hơn hoặc bằng 10";
     }
 
+    public static class Auth{
+
+        public static final String ERR_INCORRECT_CREDENTIALS = "Mã nhân viên hoặc mật khẩu không đúng";
+
+    }
+
     public static class Department{
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy phòng ban nào với id: %s";
         public static final String USERNAME_NOT_FOUND ="Không tìm thấy phòng ban nào với tên: %s";
@@ -34,6 +40,8 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy nhân viên nào với id: %s";
 
         public static final String USERNAME_NOT_FOUND ="Không tìm thấy nhân viên nào với tên: %s";
+
+        public static final String EMPLOYEE_ID_NOT_FOUND = "Không tìm thấy nhân viên nào với mã nhân viên: %s";
     }
 
     public static class Contract{
