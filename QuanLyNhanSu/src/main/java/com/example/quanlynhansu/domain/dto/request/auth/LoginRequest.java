@@ -16,6 +16,7 @@ public class LoginRequest {
     @Size(min = 10, max = 10, message = ErrorMessage.Validation.INVALID_EMPLOYEE_CODE)
     private String employeeCode;
 
+    @NotBlank(message = ErrorMessage.Validation.NOT_BLANK)
     private String password;
 
 }
