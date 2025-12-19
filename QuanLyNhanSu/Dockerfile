@@ -8,6 +8,6 @@ RUN ./mvnw package -DskipTests
 
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=builder /app/target/QuanLyNhanSu-0.0.1-SNAPSHOT.war quanlynhansu.war
+COPY --from=builder /app/target/QuanLyNhanSu-0.0.1-SNAPSHOT.jar quanlynhansu.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "quanlynhan.war"]
+ENTRYPOINT ["java", "-jar", "quanlynhan.jar"]
