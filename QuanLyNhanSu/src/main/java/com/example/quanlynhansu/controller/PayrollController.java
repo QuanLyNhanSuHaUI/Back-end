@@ -9,14 +9,12 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestApiV1
 @RequiredArgsConstructor
@@ -33,6 +31,14 @@ public class PayrollController {
     @GetMapping(UrlConstant.Payroll.PAYROLL_ID)
     public ResponseEntity<?> getPayrollById(@PathVariable(required = false) String id){
         return VsResponseUtil.success(HttpStatus.OK, payrollService.getPayrollById(id));
+    }
+
+    @GetMapping(UrlConstant.Payroll.PAYROLL_CONDITIONS)
+    public ResponseEntity<?> getPayrollByConditions(
+            @RequestParam(required = false) BigDecimal baseSalary,
+            @RequestParam(required = false) Integer month,
+            @RequestParam(required = false) Integer year, Pageable pageable){
+        return VsResponseUtil.success(HttpStatus.OK,payrollService.getPayrollByConditions(baseSalary,month,year,pageable));
     }
 
 }
