@@ -1,7 +1,5 @@
 package com.example.quanlynhansu.constant;
 
-import com.example.quanlynhansu.domain.entity.Department;
-
 public class UrlConstant {
 
     public static class Department{
@@ -32,6 +30,12 @@ public class UrlConstant {
 
         public static final String CONTRACT_OF_EMPLOYEE = PRE_FIX + "/find";
 
+    }
+
+    public static class Payroll{
+        private static final String PRE_FIX = "/payrolls";
+
+        public static final String PAYROLL_COMMON = PRE_FIX;
     }
 
     public static class Auth{
