@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,5 +58,31 @@ public class PayrollServiceImpl implements PayrollService {
        Payroll payroll = payrollRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.Payroll.ERR_NOT_FOUND_ID));
 
         return payrollMapper.toPayrollResponse(payroll);
+    }
+
+    @Override
+    public Page<PayrollResponse> getPayrollByConditions(BigDecimal baseSalary, Integer month, Integer year, Pageable pageable) {
+
+        Page<Payroll> payrolls = payrollRepository.findAll(new Specification<>() {
+            @Override
+            public @Nullable Predicate toPredicate(Root<Payroll> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+
+                List<Predicate> predicates = new ArrayList<>();
+
+                if (baseSalary!=null){
+                    predicates.add(criteriaBuilder.equal(root.get("baseSalary"), baseSalary));
+                }
+
+                if (month!=null){
+                    predicates.add(criteriaBuilder.equal(root.get("month"),month));
+                }
+                if (year!=null){
+                    predicates.add(criteriaBuilder.equal(root.get("year"),year));
+                }
+                return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+            }
+        },pageable);
+
+        return payrolls.map(payrollMapper::toPayrollResponse);
     }
 }
