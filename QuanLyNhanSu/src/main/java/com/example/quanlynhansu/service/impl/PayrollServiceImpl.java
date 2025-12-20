@@ -10,11 +10,22 @@ import com.example.quanlynhansu.exception.NotFoundException;
 import com.example.quanlynhansu.repository.EmployeeRepository;
 import com.example.quanlynhansu.repository.PayrollRepository;
 import com.example.quanlynhansu.service.PayrollService;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.Nullable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +49,13 @@ public class PayrollServiceImpl implements PayrollService {
         Payroll savedPayroll = payrollRepository.save(payroll);
 
         return payrollMapper.toPayrollResponse(savedPayroll);
+    }
+
+    @Override
+    public PayrollResponse getPayrollById(String id) {
+
+       Payroll payroll = payrollRepository.findById(id).orElseThrow(() -> new NotFoundException(ErrorMessage.Payroll.ERR_NOT_FOUND_ID));
+
+        return payrollMapper.toPayrollResponse(payroll);
     }
 }

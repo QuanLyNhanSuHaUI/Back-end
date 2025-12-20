@@ -44,6 +44,10 @@ public class ErrorMessage {
         public static final String EMPLOYEE_ID_NOT_FOUND = "Không tìm thấy nhân viên nào với mã nhân viên: %s";
     }
 
+    public static class Payroll{
+        public static final String ERR_NOT_FOUND_ID ="Không tìm thấy bảng lương nào với id: %s";
+    }
+
     public static class Contract{
 
         public static final String ERR_NOT_FOUND_ID ="Không tìm thấy hợp đồng nào với id: %s";

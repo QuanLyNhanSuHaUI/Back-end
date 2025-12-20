@@ -9,8 +9,12 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.aspectj.lang.annotation.RequiredTypes;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,6 +28,11 @@ public class PayrollController {
     @PostMapping(UrlConstant.Payroll.PAYROLL_COMMON)
     public ResponseEntity<?> createPayroll(@Valid @RequestBody PayrollCreationRequest request){
         return VsResponseUtil.success(HttpStatus.CREATED, payrollService.createPayroll(request));
+    }
+
+    @GetMapping(UrlConstant.Payroll.PAYROLL_ID)
+    public ResponseEntity<?> getPayrollById(@PathVariable(required = false) String id){
+        return VsResponseUtil.success(HttpStatus.OK, payrollService.getPayrollById(id));
     }
 
 }
