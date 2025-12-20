@@ -4,6 +4,7 @@ import com.example.quanlynhansu.base.RestApiV1;
 import com.example.quanlynhansu.base.VsResponseUtil;
 import com.example.quanlynhansu.constant.UrlConstant;
 import com.example.quanlynhansu.domain.dto.request.contract.ContractCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.contract.ContractUpdateRequest;
 import com.example.quanlynhansu.service.ContractService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -38,6 +39,11 @@ public class ContractController {
     @GetMapping(UrlConstant.Contract.CONTRACT_OF_EMPLOYEE)
     public ResponseEntity<?> getContractByEmployeeName(@RequestParam() String name){
         return VsResponseUtil.success(HttpStatus.OK, contractService.getContractByEmployeeName(name));
+    }
+
+    @PatchMapping(UrlConstant.Contract.CONTRACT_ID)
+    public ResponseEntity<?> updateContract(@RequestBody ContractUpdateRequest request, @PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.ACCEPTED, contractService.updateContract(request,id));
     }
 
 }

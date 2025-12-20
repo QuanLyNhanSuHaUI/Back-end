@@ -2,6 +2,7 @@ package com.example.quanlynhansu.service.impl;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.domain.dto.request.contract.ContractCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.contract.ContractUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.ContractResponse;
 import com.example.quanlynhansu.domain.entity.Contract;
 import com.example.quanlynhansu.domain.entity.Employee;
@@ -61,8 +62,8 @@ public class ContractServiceImpl implements ContractService {
     public ContractResponse getContractById(String id) {
 
         Contract contract = contractRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(ErrorMessage.Contract.ERR_NOT_FOUND_ID
-                        , new String[]{id}));
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Contract.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
 
         return contractMapper.toContractResponse(contract);
     }
@@ -84,4 +85,20 @@ public class ContractServiceImpl implements ContractService {
 
         return contractMapper.toListContractResponses(contracts);
     }
+
+    @Override
+    public ContractResponse updateContract(ContractUpdateRequest request, String id) {
+
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Contract.ERR_NOT_FOUND_ID,
+                        new String[]{id}));
+
+        contractMapper.updateContractResponse(request, contract);
+
+        contractRepository.save(contract);
+
+        return contractMapper.toContractResponse(contract);
+    }
+
+
 }
