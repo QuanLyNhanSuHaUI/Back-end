@@ -1,12 +1,12 @@
 package com.example.quanlynhansu.domain.mapper;
 
 import com.example.quanlynhansu.domain.dto.request.contract.ContractCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.contract.ContractUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.ContractResponse;
 import com.example.quanlynhansu.domain.dto.response.EmployeeResponse;
 import com.example.quanlynhansu.domain.entity.Contract;
 import com.example.quanlynhansu.domain.entity.Employee;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -19,5 +19,8 @@ public interface ContractMapper {
     ContractResponse toContractResponse(Contract contract);
 
     List<ContractResponse> toListContractResponses(List<Contract> list);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateContractResponse (ContractUpdateRequest request, @MappingTarget Contract contract);
 
 }
