@@ -36,6 +36,8 @@ public class UrlConstant {
         private static final String PRE_FIX = "/payrolls";
 
         public static final String PAYROLL_COMMON = PRE_FIX;
+
+        public static final String PAYROLL_ID = PRE_FIX + "/{id}";
     }
 
     public static class Auth{
