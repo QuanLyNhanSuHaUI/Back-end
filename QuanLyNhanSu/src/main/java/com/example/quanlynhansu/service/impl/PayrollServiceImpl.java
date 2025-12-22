@@ -2,6 +2,7 @@ package com.example.quanlynhansu.service.impl;
 
 import com.example.quanlynhansu.constant.ErrorMessage;
 import com.example.quanlynhansu.domain.dto.request.payroll.PayrollCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.payroll.PayrollUpdateRequest;
 import com.example.quanlynhansu.domain.dto.response.PayrollResponse;
 import com.example.quanlynhansu.domain.entity.Employee;
 import com.example.quanlynhansu.domain.entity.Payroll;
@@ -84,5 +85,18 @@ public class PayrollServiceImpl implements PayrollService {
         },pageable);
 
         return payrolls.map(payrollMapper::toPayrollResponse);
+    }
+
+    @Override
+    public PayrollResponse updatePayroll(PayrollUpdateRequest request, String id) {
+
+        Payroll payroll = payrollRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException(ErrorMessage.Payroll.ERR_NOT_FOUND_ID));
+
+        payrollMapper.updatePayrollResponse(request,payroll);
+
+        payrollRepository.save(payroll);
+
+        return payrollMapper.toPayrollResponse(payroll);
     }
 }

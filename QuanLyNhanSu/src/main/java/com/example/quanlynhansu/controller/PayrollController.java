@@ -4,6 +4,8 @@ import com.example.quanlynhansu.base.RestApiV1;
 import com.example.quanlynhansu.base.VsResponseUtil;
 import com.example.quanlynhansu.constant.UrlConstant;
 import com.example.quanlynhansu.domain.dto.request.payroll.PayrollCreationRequest;
+import com.example.quanlynhansu.domain.dto.request.payroll.PayrollUpdateRequest;
+import com.example.quanlynhansu.domain.entity.Payroll;
 import com.example.quanlynhansu.service.PayrollService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
@@ -39,6 +41,11 @@ public class PayrollController {
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) Integer year, Pageable pageable){
         return VsResponseUtil.success(HttpStatus.OK,payrollService.getPayrollByConditions(baseSalary,month,year,pageable));
+    }
+
+    @PatchMapping(UrlConstant.Payroll.PAYROLL_ID)
+    public ResponseEntity<?> updatePayroll(@RequestBody PayrollUpdateRequest request,@PathVariable String id){
+        return VsResponseUtil.success(HttpStatus.ACCEPTED, payrollService.updatePayroll(request, id));
     }
 
 }
