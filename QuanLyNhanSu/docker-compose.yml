@@ -1,19 +1,31 @@
 services:
-  db:
+  # Container Database
+  db-nhansu:
     image: mysql:8.0
+    container_name: mysql-container
     environment:
-      MYSQL_DATABASE: quanlynhansu
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: QuanLyNhanSu
+      MYSQL_ROOT_PASSWORD: thnhpahm2710
     ports:
-      - "3307:3306"
+      - "3307:3306" # Máy thật dùng 3307 để tránh đụng độ
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
 
-  app:
-    build: .
+  # Container Back-end
+  app-nhansu:
+    image: thnhpahm2710/quan-ly-nhan-su:v2
+    container_name: backend-app
     ports:
-      - "8080:8080"
+      - "9000:8080"
     depends_on:
-      - db
+      db-nhansu:
+        condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/quanlynhansu
+      # Kết nối tới db-nhansu thông qua tên service trong mạng Docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-nhansu:3306/QuanLyNhanSu?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: thnhpahm2710
+      # Một số cấu hình bổ sung để đảm bảo Hibernate chạy mượt
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
